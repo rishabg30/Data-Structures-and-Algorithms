@@ -1,26 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
-void printArray_1D(vector<int> &arr)
+int find_start_position(int arr[], int n, int target)
 {
-    for (auto it : arr)
-    {
-        cout << it << " ";
-    }
-    cout << endl;
-}
-int find_start_position(vector<int> &nums, int target)
-{
-    int n = nums.size(), ans = -1;
+    int ans = -1;
     int low = 0, high = n - 1;
     while (low <= high)
     {
         int mid = (low + high) / 2;
-        if (nums[mid] == target)
+        if (arr[mid] == target)
         {
             ans = mid;
             high = mid - 1;
         }
-        else if (nums[mid] < target)
+        else if (arr[mid] < target)
         {
             low = mid + 1;
         }
@@ -31,19 +23,19 @@ int find_start_position(vector<int> &nums, int target)
     }
     return ans;
 }
-int find_end_position(vector<int> &nums, int target)
+int find_end_position(int arr[], int n, int target)
 {
-    int n = nums.size(), ans = -1;
+    int ans = -1;
     int low = 0, high = n - 1;
     while (low <= high)
     {
         int mid = (low + high) / 2;
-        if (nums[mid] == target)
+        if (arr[mid] == target)
         {
             ans = mid;
             low = mid + 1;
         }
-        else if (nums[mid] < target)
+        else if (arr[mid] < target)
         {
             low = mid + 1;
         }
@@ -54,11 +46,16 @@ int find_end_position(vector<int> &nums, int target)
     }
     return ans;
 }
-vector<int> searchRange(vector<int> &nums, int target)
+int count(int arr[], int n, int x)
 {
-    int si = find_start_position(nums, target);
-    int ei = find_end_position(nums, target);
-    return {si, ei};
+    int si = -1, ei = -1;
+    si = find_start_position(arr, n, x);
+    ei = find_end_position(arr, n, x);
+    if (si == -1)
+    {
+        return 0;
+    }
+    return ei - si + 1;
 }
 signed main()
 {
@@ -73,13 +70,12 @@ signed main()
     */
     int n;
     cin >> n;
-    vector<int> arr(n);
+    int arr[n];
     for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
-    int target;
-    cin >> target;
-    vector<int> ans = searchRange(arr, target);
-    printArray_1D(ans);
+    int x;
+    cin >> x;
+    cout << count(arr, n, x) << endl;
 }
