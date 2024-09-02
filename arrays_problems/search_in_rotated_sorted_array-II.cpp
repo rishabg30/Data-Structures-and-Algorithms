@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-int search(vector<int> &nums, int target)
+bool search(vector<int> &nums, int target)
 {
     int n = nums.size();
     int low = 0, high = n - 1;
@@ -10,7 +10,14 @@ int search(vector<int> &nums, int target)
         int mid = (low + (high - low) / 2);
         if (nums[mid] == target)
         {
-            return mid;
+            return true;
+        }
+        // To avoid duplicacies
+        if (nums[low] == nums[mid] && nums[mid] == nums[high])
+        {
+            low++;
+            high--;
+            continue;
         }
         // Check which region is sorted left or right
         // Checking for left region
@@ -39,7 +46,7 @@ int search(vector<int> &nums, int target)
             }
         }
     }
-    return -1;
+    return false;
 }
 signed main()
 {
@@ -49,10 +56,9 @@ signed main()
 #endif
 
     /*
-    Time complexity: O(LogN)
-    Space complexity: O(1)
+    Time complexity: O()
+    Space complexity: O()
     */
-
     int n;
     cin >> n;
     vector<int> arr(n);
