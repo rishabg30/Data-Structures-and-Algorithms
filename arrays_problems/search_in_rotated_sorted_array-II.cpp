@@ -56,8 +56,8 @@ signed main()
 #endif
 
     /*
-    Time complexity: O()
-    Space complexity: O()
+    Time complexity: O(LogN)
+    Space complexity: O(1)
     */
     int n;
     cin >> n;
