@@ -24,7 +24,7 @@ vector<vector<int>> merge(vector<vector<int>> &intervals)
         int currPair_startPoint = intervals[i][0];
         int currPair_endPoint = intervals[i][1];
 
-        // If currPair startPoint == initialPair_EndPoint
+        // If currPair startPoint <= initialPair_EndPoint
         if (currPair_startPoint <= initialPair.second)
         {
             // Pairs will be merged
