@@ -17,7 +17,7 @@ signed main()
 #endif
 
     /*
-    Time complexity: O(max(a,b))
+    Time complexity: O(log(min(a,b)))
     Space complexity: O(1)
     */
     int a, b;
