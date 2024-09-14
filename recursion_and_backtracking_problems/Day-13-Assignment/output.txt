@@ -1,0 +1,8 @@
+move disk 1 from rod 52468688 to rod 1
+move disk 2 from rod 52468688 to rod 48214392
+move disk 1 from rod 1 to rod 48214392
+move disk 3 from rod 52468688 to rod 1
+move disk 1 from rod 48214392 to rod 52468688
+move disk 2 from rod 48214392 to rod 1
+move disk 1 from rod 52468688 to rod 1
+7
