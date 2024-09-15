@@ -69,8 +69,8 @@ signed main()
 #endif
 
     /*
-    Time complexity: O()
-    Space complexity: O()
+    Time complexity: O(N)
+    Space complexity: O(1)
     */
     ListNode *node1 = new ListNode(1);
     ListNode *node2 = new ListNode(2);
