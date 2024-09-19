@@ -19,7 +19,7 @@ void NBit_formation(int n, vector<string> &ans, int countOnes, int countZeros, s
     //  Picking up 1
     NBit_formation(n - 1, ans, countOnes + 1, countZeros, psf + "1");
 
-    // Picking up 0
+    // Picking up 0 if and only if countOnes > countZeros
     if (countOnes > countZeros)
     {
         NBit_formation(n - 1, ans, countOnes, countZeros + 1, psf + "0");
