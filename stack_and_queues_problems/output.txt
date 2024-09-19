@@ -1,0 +1,9 @@
+Pushed element: 10
+Pushed element: 20
+Pushed element: 30
+Pushed element: 40
+20
+0
+Pushed element: 500
+20
+Queue is empty!
