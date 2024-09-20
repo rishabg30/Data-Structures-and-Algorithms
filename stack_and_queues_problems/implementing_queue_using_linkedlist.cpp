@@ -78,8 +78,8 @@ signed main()
 #endif
 
     /*
-    Time complexity: O()
-    Space complexity: O()
+    Time complexity: O(1)
+    Space complexity: O(N)
     */
     Queue q;
     q.push(10);
