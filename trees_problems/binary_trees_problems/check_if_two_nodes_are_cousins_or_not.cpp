@@ -27,6 +27,7 @@ bool checkParent(TreeNode *root, int a, int b)
             return true;
         }
     }
+    // call left subtree and right subtree
     return checkParent(root->left, a, b) || checkParent(root->right, a, b);
 }
 void levelOrderTraversal(TreeNode *root, int node, int &currDepth)
