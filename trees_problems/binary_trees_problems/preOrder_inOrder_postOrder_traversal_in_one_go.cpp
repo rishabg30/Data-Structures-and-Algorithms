@@ -91,7 +91,7 @@ signed main()
 
     /*
     Time complexity: O(N)
-    Space complexity: O(N)
+    Space complexity: O(N * N)
     */
     TreeNode *root = new TreeNode(1);
     TreeNode *node1 = new TreeNode(2);
