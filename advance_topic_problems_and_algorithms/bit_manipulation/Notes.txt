@@ -1,0 +1,55 @@
+1-> Bit Manipulation Operators:
+
+& (and) operator : {1 & 1 -> 1, 1 & 0 -> 0, 0 & 1 -> 0, 0 & 0 -> 0}
+| (or) operator : {1 | 1 -> 1, 1 | 0 -> 1, 0 | 1 -> 1, 0 | 0 -> 0}
+^ (xor) operator : even number of 1's lead to 0 and odd number of 1's lead to 1.
+                  {1 ^ 1 -> 0, 1 ^ 0 -> 1, 0 ^ 1 -> 1, 0 ^ 0 -> 0}
+    -> Property of xor: If same numbers are xor'ed [even count] then resultant is 0.
+~ (negation) operator : Flip the bits {1 -> 0, 0 -> 1}
+>> (right shift) operator : Shift the bits by 1 place to the right and righmost bit will be discarded.
+    -> Let's say we have a = 5, it's binary is 101, after a >> 1, it's binary will become 10
+       another example, let's say we have a = 10, it's binary is 1010, after a >> 3, it's binary will become 0001
+    -> right shift is resulting in dividing a number / 2. [right shift by x means dividing a number by 2^x]
+
+Note: When we write int x = 5; [int comprises of 32 bits], it's binary is represented as 000000.......0101 [these are 32 bits]
+<< (left shift) operator : Shift the bits by 1 place to the left and bit's will be added to the right of it.
+    -> Let's say we have a = 5, it's binary is 101, after a << 2, what will happen is 000000......0101 << 2 = 00000.....10100
+    -> left shift is resulting in multiplying a number by 2. [left shift by x means multiplying a number by 2^x]
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2-> Some Bit Manipulation Important Concepts: 
+2.1: Swapping of two number using xor operator
+    Let's say a = 5, b = 7
+    Step 1: a = a ^ b  [a = 5 ^ 7]
+    Step 2: b = a ^ b [b = 5 ^ 7 ^ 7] = 5 [b's value is swapped]
+    Step 3: a = a ^ b [a = 5 ^ 7 ^ 5] = 7 [a's value is swapped]
+    Hence a and b are swapped.
+
+2.2: Given N, print the XOR of all numbers between 1 to N [in O(1) time complexity]
+    Observation: For N = 1, ans = 1
+                 For N = 2, ans = 3
+                 For N = 3, ans = 0
+                 For N = 4, ans = 4
+                 For N = 5, ans = 1
+                 For N = 6, ans = 7
+                 For N = 7, ans = 0
+                 For N = 8, ans = 8
+                 .
+                 .
+                 .
+    There is a repetition in pattern after every 4th place.
+    If (N % 4 == 0) print(n)
+    If (N % 4 == 1) print(1)
+    If (N % 4 == 2) print(n + 1)
+    If (N % 4 == 3) print(0)
+Follow up question : find xor for range [l, r].
+
+2.3: Given N, check if N is odd or not
+    We can take help of & (and) operator and check if number is odd or not.
+    For number to be odd, it's last bit must always be 1
+    ,therefore we will take (num & 1) : if 1 comes, it means number is odd and if 0 comes, it means number is even.
+
+2.4: Given (N, i) check if ith bit is set or not
+
+
