@@ -1,13 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-void printArray_1D(vector<int> &arr)
-{
-    for (auto it : arr)
-    {
-        cout << it << " ";
-    }
-    cout << endl;
-}
 class TreeNode
 {
 public:
@@ -20,12 +12,13 @@ public:
         left = right = NULL;
     }
 };
-void markParent(TreeNode *root, TreeNode *target, map<TreeNode *, TreeNode *> &parent_track_map)
+TreeNode *markParent(TreeNode *root, int target, map<TreeNode *, TreeNode *> &parent_track_map)
 {
     if (root == NULL)
     {
-        return;
+        return NULL;
     }
+    TreeNode *startNode = NULL;
     queue<TreeNode *> q;
     q.push(root);
 
@@ -36,48 +29,47 @@ void markParent(TreeNode *root, TreeNode *target, map<TreeNode *, TreeNode *> &p
         {
             TreeNode *node = q.front();
             q.pop();
-
+            if (node->val == target)
+            {
+                startNode = node;
+            }
             // if it's left child exists push it inside the queue and mark it's parent in the map
             if (node->left)
             {
-                parent_track_map[node->left] = node;
                 q.push(node->left);
+                parent_track_map[node->left] = node;
             }
             // if it's right child exists push it inside the queue and mark it's parent
             if (node->right)
             {
-                parent_track_map[node->right] = node;
                 q.push(node->right);
+                parent_track_map[node->right] = node;
             }
         }
     }
+    return startNode;
 }
-vector<int> distanceK(TreeNode *root, TreeNode *target, int k)
+int minTime(TreeNode *root, int target)
 {
-    vector<int> ans;
     if (root == NULL)
     {
-        return {};
+        return 0;
     }
     // We will use a map to track node and it's parent correspondingly
     map<TreeNode *, TreeNode *> parent_track_map;
-    markParent(root, target, parent_track_map);
 
+    // We will also find startNode from this function only
+    TreeNode *startNode = markParent(root, target, parent_track_map);
     // Create another map to keep track of visited nodes
     map<TreeNode *, bool> visited;
     queue<TreeNode *> q;
-    q.push(target);
-    visited[target] = true;
+    q.push(startNode);
+    visited[startNode] = true;
 
-    int curr_level = 0;
+    int maxTime = 0;
     while (q.size() > 0)
     {
         int size_of_queue = q.size();
-        if (curr_level == k)
-        {
-            break;
-        }
-        curr_level++;
         for (int i = 0; i < size_of_queue; i++)
         {
             TreeNode *node = q.front();
@@ -101,13 +93,9 @@ vector<int> distanceK(TreeNode *root, TreeNode *target, int k)
                 visited[parent_track_map[node]] = true;
             }
         }
+        maxTime++;
     }
-    while (q.size() != 0)
-    {
-        ans.push_back(q.front()->val);
-        q.pop();
-    }
-    return ans;
+    return maxTime - 1;
 }
 signed main()
 {
@@ -141,6 +129,5 @@ signed main()
     node3->right = node7;
     node5->left = node8;
     node5->right = node9;
-    vector<int> ans = distanceK(root, node1, 2);
-    printArray_1D(ans);
+    cout << minTime(root, node2->val) << endl;
 }
