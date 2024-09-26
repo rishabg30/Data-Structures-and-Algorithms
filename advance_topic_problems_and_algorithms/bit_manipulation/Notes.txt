@@ -50,6 +50,44 @@ Follow up question : find xor for range [l, r].
     For number to be odd, it's last bit must always be 1
     ,therefore we will take (num & 1) : if 1 comes, it means number is odd and if 0 comes, it means number is even.
 
-2.4: Given (N, i) check if ith bit is set or not
+2.4: Given (N, i) check if ith bit is set or not. [set bit means at that place it should be 1]
+    Let's say we have n = 13, it's binary is (1101). Check if it's 2nd bit is set or not ?
+    What we can do is, 
+    int mask = (1 << 2); [1 leftshift by ithBit we want to check]
+    if(n & mask) == 1 for rightmost bit, it means bit is set otherwise bit is not set.
 
+2.5: Given (N, i) set the ithBit of a number.
+    Let's say we have n = 13, it's binary is (1101). Set it's 2nd bit.
+    What we can do is,
+    int mask = (1 << i); (create a mask of 1 << i i.e. 00000.......0100)
+    Now take N | mask, this will set the ithbit of a number
 
+2.6: Given (N, i) clear the ithBit of a number.
+    Let's say we have n = 13, it's binary is (1101). Clear it's 2nd bit.
+    What we can do is,
+    int mask = (1 << i); (create a mask of 1 << i i.e. 00000.......0100)
+    mask = ~mask [assign mask to negation of mask i.e. 11111.......1011]
+    Now take N & mask, this will clear the ithbit of a number
+
+2.7: Given N, remove the last set bit of a number.
+    Let's say we have n = 13, it's binary is (1101). Last set bit is at position 0
+    ,therefore after removing binary becomes (1100) which is 12.
+    Do (n & (n-1)) and it will remove the last set bit of a number
+    e.g. n = 13, n - 1 = 12
+    1 1 0 1
+    1 1 0 0
+  & 1 1 0 0 = 12
+
+2.8: Given a number, check if it's a power of 2 or not
+    Let's say we have n = 16, it's binary is (10000).
+    Do (n & (n-1)) and check if answer is 0, then it is a power of 2 else not.
+    e.g. n = 16 and n - 1 = 15
+    1 0 0 0 0
+    0 1 1 1 1
+  & 0 0 0 0 0 = 0, therefore a power of 2
+
+2.9: Count number of set bits in a number
+     Let's say we have n = 14, it's binary is (1110). answer should be 3
+     Simply iterate till number becomes 0 and keep a count variable and check setBits.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
