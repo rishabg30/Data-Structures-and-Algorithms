@@ -60,8 +60,8 @@ signed main()
 #endif
 
     /*
-    Time complexity: O()
-    Space complexity: O()
+    Time complexity: O(N)
+    Space complexity: O(1)
     */
     TreeNode *root = new TreeNode(1);
     TreeNode *node1 = new TreeNode(2);
