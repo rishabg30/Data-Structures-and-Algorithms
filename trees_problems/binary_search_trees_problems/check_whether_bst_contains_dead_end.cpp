@@ -12,26 +12,39 @@ public:
         left = right = NULL;
     }
 };
-bool check_validBST(TreeNode *root, long long minValue, long long maxValue)
+bool check_dead_end(TreeNode *root, int minValue, int maxValue)
 {
-    // Base Conditions
+    // Base Condition
     if (root == NULL)
-    {
-        return true;
-    }
-    if (root->val > maxValue || root->val < minValue)
     {
         return false;
     }
-    return check_validBST(root->left, minValue, root->val) && check_validBST(root->right, root->val, maxValue);
+    // if it's a leaf node
+    if (root->left == NULL && root->right == NULL)
+    {
+        if (root->val - minValue == 1 && maxValue - root->val == 1)
+        {
+            // it's a dead end
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    // Checking left and right subtrees
+    bool left_dead_end = check_dead_end(root->left, minValue, root->val);
+    bool right_dead_end = check_dead_end(root->right, root->val, maxValue);
+    return left_dead_end || right_dead_end;
 }
-bool isValidBST(TreeNode *root)
+bool isDeadEnd(TreeNode *root)
 {
     if (root == NULL)
     {
         return true;
     }
-    return check_validBST(root, -1e18, 1e18);
+    int minValue = 0, maxValue = 1e9;
+    return check_dead_end(root, minValue, maxValue);
 }
 signed main()
 {
@@ -41,7 +54,7 @@ signed main()
 #endif
 
     /*
-    Time complexity: O(LogN)
+    Time complexity: O(N)
     Space complexity: O(1)
     */
     TreeNode *root = new TreeNode(8);
@@ -63,5 +76,5 @@ signed main()
     TreeNode *node8 = new TreeNode(5);
     node3->left = node7;
     node3->right = node8;
-    cout << isValidBST(root) << endl;
+    cout << isDeadEnd(root) << endl;
 }

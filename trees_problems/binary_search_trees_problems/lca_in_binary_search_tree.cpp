@@ -12,26 +12,27 @@ public:
         left = right = NULL;
     }
 };
-bool check_validBST(TreeNode *root, long long minValue, long long maxValue)
-{
-    // Base Conditions
-    if (root == NULL)
-    {
-        return true;
-    }
-    if (root->val > maxValue || root->val < minValue)
-    {
-        return false;
-    }
-    return check_validBST(root->left, minValue, root->val) && check_validBST(root->right, root->val, maxValue);
-}
-bool isValidBST(TreeNode *root)
+TreeNode *lca_in_bst(TreeNode *root, int n1, int n2)
 {
     if (root == NULL)
     {
-        return true;
+        return NULL;
     }
-    return check_validBST(root, -1e18, 1e18);
+    // If both n1 and n2 value is less than root, move to left side
+    if (n1 < root->val && n2 < root->val)
+    {
+        return lca_in_bst(root->left, n1, n2);
+    }
+    // If both n1 and n2 value is greater than root, move to right
+    else if (n1 > root->val && n2 > root->val)
+    {
+        return lca_in_bst(root->right, n1, n2);
+    }
+    // If both gets separated, this is only the LCA
+    else
+    {
+        return root;
+    }
 }
 signed main()
 {
@@ -63,5 +64,6 @@ signed main()
     TreeNode *node8 = new TreeNode(5);
     node3->left = node7;
     node3->right = node8;
-    cout << isValidBST(root) << endl;
+    TreeNode *ans = lca_in_bst(root, node4->val, node8->val);
+    cout << ans->val << endl;
 }

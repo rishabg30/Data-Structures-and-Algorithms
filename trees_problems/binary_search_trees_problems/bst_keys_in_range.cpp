@@ -1,5 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
+void printArray_1D(vector<int> &arr)
+{
+    for (auto it : arr)
+    {
+        cout << it << " ";
+    }
+    cout << endl;
+}
 class TreeNode
 {
 public:
@@ -12,26 +20,36 @@ public:
         left = right = NULL;
     }
 };
-bool check_validBST(TreeNode *root, long long minValue, long long maxValue)
+void print_nodes_in_given_range(TreeNode *root, int low, int high, vector<int> &ans)
 {
-    // Base Conditions
+    // Base Condition
     if (root == NULL)
     {
-        return true;
+        return;
     }
-    if (root->val > maxValue || root->val < minValue)
+    /* We know inOrder traversal of a BST is always in sorted format. We will use this BST property*/
+
+    // Move to left subtree and
+    print_nodes_in_given_range(root->left, low, high, ans);
+
+    // Compute the answer
+    if (root->val >= low && root->val <= high)
     {
-        return false;
+        ans.push_back(root->val);
     }
-    return check_validBST(root->left, minValue, root->val) && check_validBST(root->right, root->val, maxValue);
+
+    // Move to right subtree
+    print_nodes_in_given_range(root->right, low, high, ans);
 }
-bool isValidBST(TreeNode *root)
+vector<int> printNearNodes(TreeNode *root, int low, int high)
 {
     if (root == NULL)
     {
-        return true;
+        return {};
     }
-    return check_validBST(root, -1e18, 1e18);
+    vector<int> ans;
+    print_nodes_in_given_range(root, low, high, ans);
+    return ans;
 }
 signed main()
 {
@@ -41,8 +59,8 @@ signed main()
 #endif
 
     /*
-    Time complexity: O(LogN)
-    Space complexity: O(1)
+    Time complexity: O(N)
+    Space complexity: O(N)
     */
     TreeNode *root = new TreeNode(8);
     TreeNode *node1 = new TreeNode(6);
@@ -63,5 +81,8 @@ signed main()
     TreeNode *node8 = new TreeNode(5);
     node3->left = node7;
     node3->right = node8;
-    cout << isValidBST(root) << endl;
+    int low, high;
+    cin >> low >> high;
+    vector<int> ans = printNearNodes(root, low, high);
+    printArray_1D(ans);
 }
