@@ -49,8 +49,8 @@ signed main()
 #endif
 
     /*
-    Time complexity: O(N ^ M)
-    Space complexity: O(N ^ M)
+    Time complexity: O(N * M)
+    Space complexity: O(N * M)
     */
 
     int n, m;
